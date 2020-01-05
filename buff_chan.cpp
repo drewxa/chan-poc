@@ -8,7 +8,7 @@ using namespace channel;
 using namespace std::chrono_literals;
 
 template <typename Chan>
-void GetInt(Chan chan) {
+void Producer(Chan chan) {
   for (int i = 0; i < 20; ++i) {
     std::this_thread::sleep_for(10ms);
     chan << std::this_thread::get_id();
@@ -19,9 +19,9 @@ int main() {
   using BuffChan = Chan<std::thread::id[20]>;
   BuffChan chan;
   
-  std::thread(GetInt<BuffChan>, chan).detach();
-  std::thread(GetInt<BuffChan>, chan).detach();
-  std::thread(GetInt<BuffChan>, chan).detach();
+  std::thread(Producer<BuffChan>, chan).detach();
+  std::thread(Producer<BuffChan>, chan).detach();
+  std::thread(Producer<BuffChan>, chan).detach();
 
   for (int i = 0; i < 60; ++i) {
     std::thread::id out{};
