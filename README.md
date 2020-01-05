@@ -25,6 +25,7 @@ Send a value into a channel using the channel `operator<<` syntax. Here we send 
 
 The `operator>>` syntax receives a value from the channel. Here we’ll receive the "ping" message we sent above and print it out.
 
+Other [examples](sync_chan.cpp).
 
 ### Channel Buffering
 `channel::Chan<T[N]>` is like [Golang Channel Buffering](https://gobyexample.com/channel-buffering).
@@ -47,7 +48,9 @@ Here we make a channel of strings buffering up to 2 values.
 
 Because this channel is buffered, we can send these values into the channel without a corresponding concurrent receive.
 
-Later we can receive these two values as usual or using the `operator*` syntax;
+Later we can receive these two values as usual or using the `operator*` syntax.
+
+Another [example](buff_chan.cpp).
 
 ### Select
 `channel::Selector` is an analog [Golang Select](https://gobyexample.com/select).
@@ -87,3 +90,5 @@ For our example we’ll select across two channels.
 Each channel will receive a value after some amount of time, to simulate e.g. blocking RPC operations executing in concurrent goroutines.
 
 We’ll use select to await both of these values simultaneously, printing each one as it arrives.
+
+Yet another [example](use_select.cpp).
